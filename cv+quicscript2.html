@@ -8,7 +8,30 @@
     <link rel="stylesheet" href="cvStyles.css" type="text/css">
     <!-- <link rel="stylesheet" href="qsStyles.css" type="text/css"> -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="QuICScript.js"></script>
+    <script src="https://pqcee.github.io/QuICScript/QuICScript.js"></script>
+    <script>
+        var inited = 0;
+        var message = "";
+        async function runQuICScript() {
+            // var rc = document.getElementById("ret")
+            var Qnum = document.getElementById("numQubits")
+            var Qcir = document.getElementById("circuit")
+            // Status: displays value of Qnum 
+            //console.log(Qnum.value);
+            // Status: undefined
+            //console.log(Qcir.value);
+
+            //var tokens = Qcir.value.split(" ");
+            //if (tokens[1] == null) // no numbers following QuICScript string
+            Module._QuICScript_begin(2);
+            resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [2, "HI,CN", 1, 0, 0, 0, 0, 0, 1, 0]);
+            //else {
+            //    resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [Qnum.value, tokens[0], parseFloat(tokens[1]), parseFloat(tokens[2]), parseFloat(tokens[3]), parseFloat(tokens[4]), parseFloat(tokens[5]), parseFloat(tokens[6]), parseFloat(tokens[7]), parseFloat(tokens[8])]);
+            //}
+            message = resultstate + "---\n" + message;
+            document.getElementById("tw").innerHTML = "<textarea readonly >" + message + "</textarea>";
+        }
+    </script>
 </head>
 
 <body>
@@ -37,42 +60,26 @@
         </div>
         <br>
         <center>
-            <div class="buttons_div">
-                <input type="text" id="circuitInput" placeholder="Enter circuit string" class="input-circuit">
-                <button id="runCircuit" class="run-circuit">Run</button>
-                <br>
-                <button id="generateQuic" class="generate-quic">Generate QUIC</button>
-                <button id="refresh" class="refresh">Refresh</button>
-                <div id="quicDisplay"></div>
-            </div>
+            <p>
+                <button onclick="runQuICScript()">Click here to Run QuICScript</button>
+            <p>
+            <h3>Results</h3>
+            <div id=tw> </div>
+            <p>
         </center>
+        <div class="buttons_div">
+            <input type="text" id="circuitInput" placeholder="Enter circuit string" class="input-circuit">
+            <button id="runCircuit" class="run-circuit">Run</button>
+            <br>
+            <button id="generateQuic" class="generate-quic">Generate QUIC</button>
+            <button id="refresh" class="refresh">Refresh</button>
+            <div id="quicDisplay"></div>
+        </div>
         <script src="script.js"></script>
     </div>
     <div>
-        <h3> Interactive </h3>
-        <label id="circuitlist" for="circuit-list">Choose a circuit:</label>
-        <select name="choice" id="choice" onchange="setChoice(this)">
-            <option value="Custom" selected>Custom</option>
-            <option value="Bell">Bell State</option>
-            <option value="GHZ">GHZ 3 Qubit</option>
-            <option value="Simon">Simon s=11</option>
-            <option value="Grover2">Grover 2 Qubit</option>
-            <option value="Grover3">Grover 3 Qubit</option>
-            <option value="Shor21">Shor (factor 21)</option>
-            <option value="Shor15">Shor (factor 15)</option>
-        </select>
-        <p>
-            Number of Qubits: <input type="number" id="numQubits" min="1" max="20" />
-        <p>
-            <label for="run">Enter Circuit:</label> <br />
-            <input type="text" id="circuit" />
-            <button onclick="runQuICScript()">Run QuICScript</button>
-            <button onclick="resetQuICScript()">Reset State</button>
-        <p>
     </div>
     <div>
-        <h3>Results</h3>
-        <div id=tw> </div>
 
     </div>
     </div>
