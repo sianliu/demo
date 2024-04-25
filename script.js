@@ -13,7 +13,7 @@ let config = `[
         "P",
         "I"
       ],
-      "startCircuit": "HI,CN"
+      "startCircuit": ""
     },
     {
         "defaultQubits": 3,
@@ -29,7 +29,7 @@ let config = `[
           "P",
           "I"
         ],
-        "startCircuit": "HI,CN,TT"
+        "startCircuit": ""
       }
   ]`;
 
