@@ -6,28 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantum Circuit Designer</title>
     <link rel="stylesheet" href="cvStyles.css" type="text/css">
-    <!-- <link rel="stylesheet" href="qsStyles.css" type="text/css"> -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://pqcee.github.io/QuICScript/QuICScript.js"></script>
     <script>
         var inited = 0;
         var message = "";
         async function runQuICScript() {
-            // var rc = document.getElementById("ret")
             var Qnum = document.getElementById("numQubits")
             var Qcir = document.getElementById("circuit")
-            // Status: displays value of Qnum 
-            //console.log(Qnum.value);
-            // Status: undefined
-            //console.log(Qcir.value);
-
-            //var tokens = Qcir.value.split(" ");
-            //if (tokens[1] == null) // no numbers following QuICScript string
             Module._QuICScript_begin(2);
             resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [2, "HI,CN", 1, 0, 0, 0, 0, 0, 1, 0]);
-            //else {
-            //    resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [Qnum.value, tokens[0], parseFloat(tokens[1]), parseFloat(tokens[2]), parseFloat(tokens[3]), parseFloat(tokens[4]), parseFloat(tokens[5]), parseFloat(tokens[6]), parseFloat(tokens[7]), parseFloat(tokens[8])]);
-            //}
             message = resultstate + "---\n" + message;
             document.getElementById("tw").innerHTML = "<textarea readonly >" + message + "</textarea>";
         }
