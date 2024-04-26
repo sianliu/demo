@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Circuit Designer</title>
+    <link rel="stylesheet" href="cvStyles.css" type="text/css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://pqcee.github.io/QuICScript/QuICScript.js"></script>
+    <script>
+        var inited = 0;
+        var message = "";
+        async function runQuICScript() {
+            var Qnum = document.getElementById("numQubits")
+            var Qcir = document.getElementById("circuit")
+            Module._QuICScript_begin(2);
+            resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [2, "HI,CN", 1, 0, 0, 0, 0, 0, 1, 0]);
+            message = resultstate + "---\n" + message;
+            document.getElementById("tw").innerHTML = "<textarea readonly >" + message + "</textarea>";
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <div id="configBoxes" class="config-boxes mt-4">
+            <!-- Configuration boxes will be dynamically loaded here -->
+        </div>
+        <div id="app" class="container mx-auto p-4">
+            <div class="flex">
+                <div id="gatePalette" class="gates">
+                    <!-- Gates will be dynamically loaded here -->
+                </div>
+                <div id="circuitContainer" class="circuit">
+                    <div id="circuit" class="qubits">
+                        <!-- Qubits will be dynamically loaded here -->
+                    </div>
+                    <button id="addQubit" class="add-qubit">Add Qubit</button>
+                </div>
+            </div>
+            <div class="flex justify-end" id="grid_hide">
+                <label for="hideGrids" class="flex items-center space-x-2 cursor-pointer select-none">
+                    <input type="checkbox" id="hideGrids" class="transform scale-125">
+                    <span>Hide Grids</span>
+                </label>
+            </div>
+        </div>
+        <br>
+        <center>
+            <p>
+                <button onclick="runQuICScript()">Click here to Run QuICScript</button>
+            <p>
+            <h3>Results</h3>
+            <div id=tw> </div>
+            <p>
+        </center>
+        <div class="buttons_div">
+            <input type="text" id="circuitInput" placeholder="Enter circuit string" class="input-circuit">
+            <button id="runCircuit" class="run-circuit">Run</button>
+            <br>
+            <button id="generateQuic" class="generate-quic">Generate QUIC</button>
+            <button id="refresh" class="refresh">Refresh</button>
+            <div id="quicDisplay"></div>
+        </div>
+        <script src="script.js"></script>
+    </div>
+    <div>
+    </div>
+    <div>
+
+    </div>
+    </div>
+</body>
+
+</html>
