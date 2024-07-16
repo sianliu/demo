@@ -1,5 +1,3 @@
-/* Stylesheet for circuit visualizer */
-
 .red-border {
     border: 2px solid red !important;
     /* Adjust the border width as needed */
@@ -164,7 +162,8 @@
 /* Button styles */
 .add-qubit {
     padding: 5px 15px;
-    background-color: #2563eb;
+    background: linear-gradient(#275FBD, #08AEE0);
+    /* background-color: #275FBD; */
     color: white;
     cursor: pointer;
     margin-top: 10px;
@@ -300,7 +299,7 @@
 }
 
 .buttons_div {
-    display: none;
+    display: block;
 }
 
 /* .config-box {
@@ -319,7 +318,7 @@
 
 #configBoxes {
     margin-left: 50px;
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;

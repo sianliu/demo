@@ -1,52 +1,33 @@
-let config = `[
-    {
-      "defaultQubits": 2,
-      "canAddDeleteQubits": true,
-      "canEdit": true,
-      "allowedGates": [
-        "H",
-        "X",
-        "Y",
-        "Z",
-        "C",
-        "N",
-        "P",
-        "I"
-      ],
-      "startCircuit": ""
-    },
-    {
-        "defaultQubits": 3,
-        "canAddDeleteQubits": true,
-        "canEdit": true,
-        "allowedGates": [
-          "H",
-          "X",
-          "Y",
-          "Z",
-          "C",
-          "N",
-          "P",
-          "I"
-        ],
-        "startCircuit": ""
-      }
-  ]`;
+let defaultQubits=2; 
+let canAddDeleteQubits=true;
+let canEdit=true;
+let allowedGates=['H','X','Y','Z','C','N','P','T','I','m'];
+let startCircuit="HI,CN";
 
+let config = `[
+  {
+    "defaultQubits": ${defaultQubits},
+    "canAddDeleteQubits": ${canAddDeleteQubits},
+    "canEdit": ${canEdit},
+    "allowedGates": "${allowedGates}",
+    "startCircuit": "${startCircuit}"
+  }
+]`;
 let configurations = JSON.parse(config);
+
 let qubitCount = 0;
-const gates = ['H', 'X', 'Y', 'Z', 'C', 'N', 'P', 'T', 'I', 'm'];
+
+// Full list of gates supported in Circuit Builder
+const GATES = ['H', 'X', 'Y', 'Z', 'C', 'N', 'P', 'T', 'I', 'm'];
+
+// Gates recognised for vertical connection to control 'C' gate
+const CONTROLLED_GATES = ['X', 'Y', 'Z', 'P', 'T', 'N'];
+
 const gatePalette = document.getElementById('gatePalette');
 const circuit = document.getElementById('circuit');
 let draggedGate = null;
 let quic;
 const maxGates = 13;
-
-let defaultQubits=1; 
-let canAddDeleteQubits=true;
-let canEdit=true;
-let allowedGates=[];
-let startCircuit="";
 
 function runCircuitFromString(circuitString) {
     // Clear existing circuit first
@@ -74,6 +55,10 @@ function runCircuitFromString(circuitString) {
     function placeGate(qubitLine, gateType) {
         const gate = document.createElement('div');
         gate.textContent = gateType;
+        if (gateType === 'I') {
+                    // hide gate if it's an identity gate
+                    gate.style.visibility = 'hidden';
+                }
         gate.classList.add('gate', 'circuit-gate');
         gate.setAttribute('draggable', 'true');
         gate.addEventListener('dragstart', dragStart);
@@ -110,7 +95,7 @@ function clearControlLines() {
 
 // Function to add a qubit line to the circuit
 function addQubit() {
-    if (qubitCount < 8) {
+    if (qubitCount < 9) {
         const qubitLine = document.createElement('div');
         qubitLine.classList.add('qubit-line');
         qubitLine.setAttribute('data-qubit', qubitCount);
@@ -146,11 +131,11 @@ function addQubit() {
 }
 
 function addSingleQubit() {
-    if (qubitCount < 8) {
+    if (qubitCount < 9) {
         addQubit(); // This function should only add a single qubit line to the circuit
         drawControlLines();
     } else {
-        alert('Maximum of 8 qubits reached.');
+        alert('Maximum number of qubits reached.');
     }
 }
 
@@ -185,11 +170,12 @@ function updateQubitLabels() {
     });
 }
 
+// Function to allow drop
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
-    // Function to handle drag start
+// Function to handle drag start
 function dragStart(ev) {
     if (!canEdit) {
         ev.preventDefault();
@@ -232,6 +218,10 @@ function drop(ev) {
         // Create a new gate if it's dragged from the palette
         gate = document.createElement('div');
         gate.textContent = gateType;
+         if(gateType === 'I') {
+            // hide gate if it's an identity gate
+            gate.style.visibility = 'hidden';
+        }
         gate.classList.add('gate', 'circuit-gate');
         gate.setAttribute('draggable', 'true');
         gate.addEventListener('dragstart', dragStart);
@@ -383,7 +373,7 @@ function drawControlLines() {
         circuit.querySelectorAll(`.qubit-line .gate:nth-child(${depth + 2})`).forEach(gate => {
             if (gate.textContent === 'C') {
                 controlGateElements.push(gate);
-            } else if (['X', 'Y', 'Z', 'N'].includes(gate.textContent)) {
+            } else if (CONTROLLED_GATES.includes(gate.textContent)) {
                 targetGatesElements.push(gate);
             }
         });
@@ -491,10 +481,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = qubitCount; i < defaultQubits; i++) {
             addQubit();
         }
-        
-      }
-
-
+      } // end resetAndInitializeEnvironment
 
     // Create boxes based on configurations
     createConfigBoxes();
@@ -509,11 +496,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 0);
 
     configBoxesContainer.addEventListener('click', function (event) {
-
-        
-
-        
-
         if (event.target.classList.contains('config-box')) {
             const index = event.target.getAttribute('data-index');
             let configuration = configurations[index];
@@ -524,27 +506,10 @@ document.addEventListener('DOMContentLoaded', function() {
             allowedGates = configuration.allowedGates;
             startCircuit = configuration.startCircuit;
             resetAndInitializeEnvironment(configuration);
-
             document.getElementById('app').style.display = 'block';
 
-
-
-
-
-
-    
-
-    
-
-    // Function to allow dropping
-    
-
-
-
-
-
     // Add gates to the palette
-    gates.forEach(function(gate, index) {
+    GATES.forEach(function(gate, index) {
         if (allowedGates.includes(gate)) {
             const gateElement = document.createElement('div');
             gateElement.textContent = gate;
@@ -556,27 +521,16 @@ document.addEventListener('DOMContentLoaded', function() {
             gatePalette.appendChild(gateElement);
         }
     });
-
-
-
-
-
     
 document.getElementById('addQubit').style.display = canAddDeleteQubits ? '' : 'none';
-
-
 document.getElementById('generateQuic').addEventListener('click', generateQuic);
-
 
 if(!canEdit) {
     document.getElementById('gatePalette').style.display = 'none';
     document.getElementById('circuitContainer').style.marginLeft = '125px';
     document.getElementById('addQubit').style.display = 'none';
 }
-
-
     drawControlLines();
-
 
     // Add event listener for the 'Add Qubit' button
     document.getElementById('addQubit').addEventListener('click', addSingleQubit);
@@ -615,16 +569,12 @@ if(!canEdit) {
             line.remove(); // This removes the separator lines from the DOM
         });
 
-
         // Reset qubit count
         qubitCount = 0;
-
-        
     
         // Add one default qubit line
         addQubit();
         
-
         document.getElementById('quicDisplay').innerHTML = '';
     });
 
@@ -642,10 +592,5 @@ if(!canEdit) {
     });
 
 }
-    
     });
-
-
-    
-    
 });
