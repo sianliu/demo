@@ -347,6 +347,7 @@ function generateQuic() {
     
     // Output the QUIC (here we simply log it to the console, you can change this to display it on the page)
     console.log(quic);
+    document.querySelector('#circuitInput').value = quic;
 
     // Optionally, output to the page
     const quicDisplay = document.getElementById('quicDisplay');
@@ -357,7 +358,7 @@ function generateQuic() {
         document.body.appendChild(display);
     } else {
         quicDisplay.textContent = quic;
-        bubble_fn_quic(quic);
+        // bubble_fn_quic(quic);
     }
 }
 
