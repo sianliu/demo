@@ -31,10 +31,13 @@ let numQubits;
 const maxGates = 13;
 
 function runQuICScript() {
-    console.log("Number of Qubits: ", numQubits); 
+    // console.log("Number of Qubits: ", numQubits); 
+    // console.log("Quicscript string: ", quic);
+    numQubits = document.querySelectorAll('.qubit-line').length;
+    document.getElementById('quicDisplay').textContent = '';
     Module._QuICScript_begin(numQubits);
-    resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [numQubits, quic, 0, 0, 0, 0, 0, 0, 0, 0]);
-    message = resultstate + "---\n" + message;
+    resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [numQubits, quic, 1,0,0,0,0,0,1,0]);
+    message = resultstate + "---\n";
     document.getElementById('quicDisplay').textContent = message;
 }
 
@@ -356,20 +359,22 @@ function generateQuic() {
     quic = quic + ".";
     
     // Output the QUIC (here we simply log it to the console, you can change this to display it on the page)
-    console.log(quic);
+    // console.log(quic);
+
+    // display circuit in input field
     document.querySelector('#circuitInput').value = quic;
 
-    // Optionally, output to the page
-    const quicDisplay = document.getElementById('quicDisplay');
-    if (!quicDisplay) {
-        const display = document.createElement('div');
-        display.id = 'quicDisplay';
-        display.textContent = quic;
-        document.body.appendChild(display);
-    } else {
-        quicDisplay.textContent = quic;
-        // bubble_fn_quic(quic);
-    }
+    // // Optionally, output to the page
+    // const quicDisplay = document.getElementById('quicDisplay');
+    // if (!quicDisplay) {
+    //     const display = document.createElement('div');
+    //     display.id = 'quicDisplay';
+    //     display.textContent = quic;
+    //     document.body.appendChild(display);
+    // } else {
+    //     quicDisplay.textContent = quic;
+    //     // bubble_fn_quic(quic);
+    // }
 }
 
 
@@ -564,7 +569,6 @@ if(!canEdit) {
     document.getElementById('runCircuit').addEventListener('click', function () {
         // const circuitString = document.getElementById('circuitInput').value;
         // runCircuitFromString(circuitString);
-        numQubits = document.querySelectorAll('.qubit-line').length;
         runQuICScript();
 
     });
