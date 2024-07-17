@@ -31,7 +31,7 @@ let numQubits;
 const maxGates = 13;
 
 function runQuICScript() {
-    numQubits = document.querySelectorAll('.qubit-line').length;
+    console.log("Number of Qubits: ", numQubits); 
     Module._QuICScript_begin(numQubits);
     resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [numQubits, quic, 0, 0, 0, 0, 0, 0, 0, 0]);
     message = resultstate + "---\n" + message;
@@ -353,6 +353,7 @@ function generateQuic() {
         // Filter out undefined or empty entries before joining
         return depth.filter(gate => gate).join('');
     }).filter(entry => entry !== '').join(',');
+    quic = quic + ".";
     
     // Output the QUIC (here we simply log it to the console, you can change this to display it on the page)
     console.log(quic);
@@ -563,6 +564,7 @@ if(!canEdit) {
     document.getElementById('runCircuit').addEventListener('click', function () {
         // const circuitString = document.getElementById('circuitInput').value;
         // runCircuitFromString(circuitString);
+        numQubits = document.querySelectorAll('.qubit-line').length;
         runQuICScript();
 
     });
