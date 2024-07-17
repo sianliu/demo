@@ -27,7 +27,16 @@ const gatePalette = document.getElementById('gatePalette');
 const circuit = document.getElementById('circuit');
 let draggedGate = null;
 let quic;
+let numQubits;
 const maxGates = 13;
+
+function runQuICScript() {
+    numQubits = document.querySelectorAll('.qubit-line').length;
+    Module._QuICScript_begin(numQubits);
+    resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [numQubits, quic, 0, 0, 0, 0, 0, 0, 0, 0]);
+    message = resultstate + "---\n" + message;
+    document.getElementById('quicDisplay').textContent = message;
+}
 
 function runCircuitFromString(circuitString) {
     // Clear existing circuit first
@@ -552,8 +561,9 @@ if(!canEdit) {
     });
 
     document.getElementById('runCircuit').addEventListener('click', function () {
-        const circuitString = document.getElementById('circuitInput').value;
-        runCircuitFromString(circuitString);
+        // const circuitString = document.getElementById('circuitInput').value;
+        // runCircuitFromString(circuitString);
+        runQuICScript();
 
     });
     

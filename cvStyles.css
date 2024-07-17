@@ -197,7 +197,7 @@
 }
 
 .refresh {
-    display: none;
+    display: display-box;
     margin-left: 20px;
     padding: 5px 15px;
     background-color: #063df1;
@@ -242,7 +242,6 @@
     margin: 10px 0;
     width: 100%;
     overflow-x: auto;
-    visibility: hidden;
 }
 
 .input-circuit {
