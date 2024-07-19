@@ -1,7 +1,6 @@
 .container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
 }
 
 textarea {
@@ -206,7 +205,20 @@ textarea {
     border-radius: 4px;
     align-self: center;
     align-content: center;
-    width: 150px;
+    width: 80px;
+}
+
+.generate-qibo {
+    padding: 5px 15px;
+    background: linear-gradient(#275FBD, #08AEE0);
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    align-self: center;
+    align-content: center;
+    width: 80px;
 }
 
 .refresh {
@@ -222,6 +234,7 @@ textarea {
     align-self: center;
     align-content: center;
     width: 150px;
+    visibility: hidden;
 }
 
 .control-line {
@@ -251,12 +264,20 @@ textarea {
     /* Set the font size */
     color: #333;
     /* Set the text color */
-    width: 70%;
+    width: 30%;
     float: right;
     margin-top: 15px;
 }
 
 .input-circuit {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.input-oracle {
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 8px;
@@ -313,7 +334,7 @@ textarea {
 
 .buttons_div {
     display: block;
-    margin: 0 auto;
+    margin: 20px;
 }
 
 /* .config-box {
