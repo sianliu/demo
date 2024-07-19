@@ -238,10 +238,9 @@
     /* Set the font size */
     color: #333;
     /* Set the text color */
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%;
-    overflow-x: auto;
+    width: 70%;
+    float: right;
+    margin-top: 15px;
 }
 
 .input-circuit {
