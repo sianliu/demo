@@ -34,13 +34,14 @@ function generateQibo() {
     numQubits = document.querySelectorAll('.qubit-line').length;
     resultstate = Module.ccall('QuICScript_Qibo', 'string', ['number', 'string', 'number', 'number', 'number'], [numQubits, quic, 0,0,0]);
     // status generates the result in chrome dev tools console
+    document.getElementById('qiboDisplay').innerHTML= "<textarea readonly >" + resultstate + "</textarea>";
 }
 
 function runQuICScript() {
     // console.log("Number of Qubits: ", numQubits); 
     // console.log("Quicscript string: ", quic);
     numQubits = document.querySelectorAll('.qubit-line').length;
-    document.getElementById('quicDisplay').textContent = '';
+    document.getElementById('quicDisplay').innerHTML = '';
     // if running for the first time
     if(!inited) {
         Module._QuICScript_begin(numQubits);

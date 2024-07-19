@@ -269,6 +269,18 @@ textarea {
     margin-top: 15px;
 }
 
+#qiboDisplay {
+    font-family: 'Courier New', Courier, monospace;
+    /* Use a monospace font for better alignment */
+    font-size: 18px;
+    /* Set the font size */
+    color: #333;
+    /* Set the text color */
+    float: center;
+    margin-top: 15px;
+    margin-left: 200px;
+}
+
 .input-circuit {
     margin-top: 20px;
     margin-bottom: 20px;
