@@ -30,6 +30,12 @@ let quic;
 let numQubits;
 const maxGates = 13;
 
+function generateQibo() {
+    numQubits = document.querySelectorAll('.qubit-line').length;
+    resultstate = Module.ccall('QuICScript_Qibo', 'string', ['number', 'string', 'number', 'number', 'number'], [numQubits, quic, 0,0,0]);
+    // status generates the result in chrome dev tools console
+}
+
 function runQuICScript() {
     // console.log("Number of Qubits: ", numQubits); 
     // console.log("Quicscript string: ", quic);
@@ -390,7 +396,6 @@ function generateQuic() {
     //     // bubble_fn_quic(quic);
     // }
 }
-
 
 function drawControlLines() {
     // Clear any existing control lines
