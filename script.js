@@ -52,7 +52,7 @@ function runQuICScript() {
     }
     resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [numQubits, quic, 1,0,0,0,0,0,1,0]);
     message = resultstate + "---\n" + message;
-    document.getElementById('quicDisplay').textContent = message;
+    document.getElementById('quicDisplay').innerHTML = "<textarea readonly >" + message + "</textarea>";
 }
 
 function runCircuitFromString(circuitString) {
