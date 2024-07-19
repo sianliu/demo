@@ -1,3 +1,9 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .red-border {
     border: 2px solid red !important;
     /* Adjust the border width as needed */
