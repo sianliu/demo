@@ -35,9 +35,23 @@ function runQuICScript() {
     // console.log("Quicscript string: ", quic);
     numQubits = document.querySelectorAll('.qubit-line').length;
     document.getElementById('quicDisplay').textContent = '';
-    Module._QuICScript_begin(numQubits);
+    // if running for the first time
+    if(!inited) {
+        Module._QuICScript_begin(numQubits);
+        inited = numQubits;
+        message = "State is reset, working on " + numQubits + " Qubits\n";
+    }
+    // for subsequent runs
+    else {
+        if(inited != numQubits) {
+            Module._QuICScript_end();
+            Module._QuICScript_begin(numQubits);
+            inited = numQubits;
+            message = "State is reset, working on " + numQubits + " Qubits\n";
+        }
+    }
     resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [numQubits, quic, 1,0,0,0,0,0,1,0]);
-    message = resultstate + "---\n";
+    message = resultstate + "---\n" + message;
     document.getElementById('quicDisplay').textContent = message;
 }
 
