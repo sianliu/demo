@@ -564,6 +564,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 document.getElementById('addQubit').style.display = canAddDeleteQubits ? '' : 'none';
 document.getElementById('generateQuic').addEventListener('click', generateQuic);
+document.getElementById('generateQibo').addEventListener('click', generateQibo);
 
 if(!canEdit) {
     document.getElementById('gatePalette').style.display = 'none';
