@@ -28,7 +28,25 @@ const circuit = document.getElementById('circuit');
 let draggedGate = null;
 let quic;
 let numQubits;
+let oracle;
 const maxGates = 13;
+
+function getOracleGates() {
+    let oracle = ''; 
+    // get all oracle gates
+    oracleGates = document.querySelectorAll('.qubit-line .red-border');
+
+    // display gates in oracle input
+    for(gate of oracleGates) {     
+        oracle += gate.textContent;
+    }
+    // if there are oracle gates, add a comma
+    if(oracle.length > 0) {
+        oracle = oracle + ',';
+    } 
+    
+    return oracle;
+}
 
 function generateQibo() {
     numQubits = document.querySelectorAll('.qubit-line').length;
@@ -371,6 +389,8 @@ function generateQuic() {
         });
     });
 
+    oracle = getOracleGates();
+  
     // Join the gates with commas and create the QUIC string
     // quic = depthGates.map(depth => depth.join('')).join(',');
     quic = depthGates.map(depth => {
@@ -384,6 +404,9 @@ function generateQuic() {
 
     // display circuit in input field
     document.querySelector('#circuitInput').value = quic;
+    // display oracle gates in input field
+    document.querySelector('#oracleInput').value = oracle;
+  
 
     // // Optionally, output to the page
     // const quicDisplay = document.getElementById('quicDisplay');
