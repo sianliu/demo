@@ -28,8 +28,23 @@ const circuit = document.getElementById('circuit');
 let draggedGate = null;
 let quic;
 let numQubits;
+let preGates;
 let oracle;
 const maxGates = 13;
+
+function getPreGates() {
+    preGates = '';
+    let allGates = document.querySelectorAll('.qubit-line .circuit-gate');
+    for (gate of allGates) {
+        if (gate.classList.contains('red-border')) {
+            continue; 
+        }
+        preGates += gate.textContent; 
+    } 
+    preGates = preGates + ',';
+    
+    return preGates;
+}
 
 function getOracleGates() {
     let oracle = ''; 
@@ -389,6 +404,7 @@ function generateQuic() {
         });
     });
 
+    preGates = getPreGates();
     oracle = getOracleGates();
   
     // Join the gates with commas and create the QUIC string
@@ -402,8 +418,8 @@ function generateQuic() {
     // Output the QUIC (here we simply log it to the console, you can change this to display it on the page)
     // console.log(quic);
 
-    // display circuit in input field
-    document.querySelector('#circuitInput').value = quic;
+    // display pre circuit in input field
+    document.querySelector('#circuitInput').value = preGates;
     // display oracle gates in input field
     document.querySelector('#oracleInput').value = oracle;
   
