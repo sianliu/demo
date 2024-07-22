@@ -406,14 +406,14 @@ function generateQuic() {
 
     preGates = getPreGates();
     oracle = getOracleGates();
-  
+     
     // Join the gates with commas and create the QUIC string
     // quic = depthGates.map(depth => depth.join('')).join(',');
-    quic = depthGates.map(depth => {
-        // Filter out undefined or empty entries before joining
-        return depth.filter(gate => gate).join('');
-    }).filter(entry => entry !== '').join(',');
-    quic = quic + ".";
+    // quic = depthGates.map(depth => {
+    //     // Filter out undefined or empty entries before joining
+    //     return depth.filter(gate => gate).join('');
+    // }).filter(entry => entry !== '').join(',');
+    quic = preGates + oracle + ".";
     
     // Output the QUIC (here we simply log it to the console, you can change this to display it on the page)
     // console.log(quic);
