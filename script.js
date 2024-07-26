@@ -1,8 +1,8 @@
-let defaultQubits=2; 
+let defaultQubits=4; 
 let canAddDeleteQubits=true;
 let canEdit=true;
 let allowedGates=['H','X','Y','Z','C','N','P','T','I','m'];
-let startCircuit="HI,CN";
+let startCircuit="HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI";
 
 let config = `[
   {
@@ -30,7 +30,7 @@ let quic;
 let numQubits;
 let preGates;
 let oracle;
-const maxGates = 13;
+const maxGates = 30;
 
 function getPreGates() {
     preGates = '';
@@ -404,24 +404,25 @@ function generateQuic() {
         });
     });
 
-    preGates = getPreGates();
-    oracle = getOracleGates();
+    // to be used for Grover circuit
+    // preGates = getPreGates();
+    // oracle = getOracleGates();
      
     // Join the gates with commas and create the QUIC string
-    // quic = depthGates.map(depth => depth.join('')).join(',');
-    // quic = depthGates.map(depth => {
-    //     // Filter out undefined or empty entries before joining
-    //     return depth.filter(gate => gate).join('');
-    // }).filter(entry => entry !== '').join(',');
-    quic = preGates + oracle + ".";
+    quic = depthGates.map(depth => depth.join('')).join(',');
+    quic = depthGates.map(depth => {
+        // Filter out undefined or empty entries before joining
+        return depth.filter(gate => gate).join('');
+    }).filter(entry => entry !== '').join(',');
+    quic = quic + ".";
     
     // Output the QUIC (here we simply log it to the console, you can change this to display it on the page)
     // console.log(quic);
 
     // display pre circuit in input field
-    document.querySelector('#circuitInput').value = preGates;
-    // display oracle gates in input field
-    document.querySelector('#oracleInput').value = oracle;
+    document.querySelector('#circuitInput').value = quic;
+    // to be used for grover circuit
+    // document.querySelector('#oracleInput').value = oracle;
   
 
     // // Optionally, output to the page
