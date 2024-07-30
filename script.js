@@ -72,12 +72,12 @@ function generateQibo() {
 }
 
 function runQuICScript() {
-    // console.log("Number of Qubits: ", numQubits); 
-    // console.log("Quicscript string: ", quic);
+    var inited = 0;
+    var message = '';
     numQubits = document.querySelectorAll('.qubit-line').length;
     document.getElementById('quicDisplay').innerHTML = '';
     // if running for the first time
-    if(!inited) {
+    if(inited == 0) {
         Module._QuICScript_begin(numQubits);
         inited = numQubits;
         message = "State is reset, working on " + numQubits + " Qubits\n";
@@ -628,13 +628,8 @@ if(!canEdit) {
         }
     });
 
-    document.getElementById('runCircuit').addEventListener('click', function () {
-        // const circuitString = document.getElementById('circuitInput').value;
-        // runCircuitFromString(circuitString);
-        runQuICScript();
+    document.getElementById('runCircuit').addEventListener('click', runQuICScript);
 
-    });
-    
     document.getElementById('refresh').addEventListener('click', function () {
         // Remove all qubit lines
         const qubitLines = document.querySelectorAll('.qubit-line');

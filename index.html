@@ -8,18 +8,6 @@
     <link rel="stylesheet" href="cvStyles.css" type="text/css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://pqcee.github.io/QuICScript/QuICScript.js"></script>
-    <script>
-        var inited = 0;
-        var message = "";
-        async function runQuICScript() {
-            var Qnum = document.getElementById("numQubits")
-            var Qcir = document.getElementById("circuit")
-            Module._QuICScript_begin(2);
-            resultstate = Module.ccall('QuICScript_cont', 'string', ['number', 'string', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'], [2, "HI,CN", 1, 0, 0, 0, 0, 0, 1, 0]);
-            message = resultstate + "---\n" + message;
-            document.getElementById("tw").innerHTML = "<textarea readonly >" + message + "</textarea>";
-        }
-    </script>
 </head>
 
 <body>
@@ -47,14 +35,6 @@
             </div>
         </div>
         <br>
-        <!-- <center>
-            <p>
-                <button onclick="runQuICScript()">Click here to Run QuICScript</button>
-            <p>
-            <h3>Results</h3>
-            <div id=tw> </div>
-            <p>
-        </center> -->
         <div class="container">
             <div class="buttons_div">
                 <input type="text" id="circuitInput" placeholder="Enter circuit string" class="input-circuit">
