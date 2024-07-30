@@ -52,7 +52,7 @@ textarea {
 }
 
 .circuit {
-    width: 700px;
+    width: auto;
     padding: 10px;
     border: 2px solid #fbbf24;
     /* Yellow border */
