@@ -1,8 +1,9 @@
-let defaultQubits=4; 
+let defaultQubits=2; 
 let canAddDeleteQubits=true;
 let canEdit=true;
 let allowedGates=['H','X','Y','Z','C','N','P','T','I','m'];
-let startCircuit="HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI";
+// let startCircuit="HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI";
+let startCircuit = "HI,CN"
 
 let config = `[
   {
@@ -30,7 +31,7 @@ let quic;
 let numQubits;
 let preGates;
 let oracle;
-const maxGates = 30;
+const maxGates = 13;
 
 function getPreGates() {
     preGates = '';
