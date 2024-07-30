@@ -1,9 +1,9 @@
-let defaultQubits=2; 
+let defaultQubits=4; 
 let canAddDeleteQubits=true;
 let canEdit=true;
 let allowedGates=['H','X','Y','Z','C','N','P','T','I','m'];
-// let startCircuit="HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI";
-let startCircuit = "HI,CN"
+let startCircuit="HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI";
+// let startCircuit = "HI,CN"
 
 let config = `[
   {
@@ -31,7 +31,7 @@ let quic;
 let numQubits;
 let preGates;
 let oracle;
-const maxGates = 13;
+const maxGates = 50;
 
 function getPreGates() {
     preGates = '';
@@ -441,6 +441,8 @@ function generateQuic() {
 
 function drawControlLines() {
     // Clear any existing control lines
+    clearControlLines();
+
     // Modify this part in the drawControlLines function:
     document.querySelectorAll('.gate.red-border').forEach(gate => gate.classList.remove('red-border'));
 
