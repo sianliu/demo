@@ -520,8 +520,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //document.getElementById('app').style.display = 'none';
 
-    
-
     const configBoxesContainer = document.getElementById('configBoxes');
     const gatePalette = document.getElementById('gatePalette');
     const circuit = document.getElementById('circuit');
@@ -672,6 +670,11 @@ if(!canEdit) {
                 gate.style.border = '1px dashed #d1d5db';
             }
         });
+    });
+    
+    window.addEventListener('resize', (event) => {
+        clearControlLines();
+        drawControlLines();
     });
 
 }
