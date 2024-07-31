@@ -34,7 +34,16 @@ let quic;
 let numQubits;
 let preGates;
 let oracle;
+let inited = 0;
+let message = '';
 const maxGates = 12;
+
+function resetState() {
+    Module._QuICScript_end();
+    inited = 0;
+    message = "State is cleared.";
+    document.getElementById('quicDisplay').innerHTML = "<textarea readonly >" + message + "</textarea>";
+}
 
 function getPreGates() {
     preGates = '';
@@ -75,8 +84,6 @@ function generateQibo() {
 }
 
 function runQuICScript() {
-    var inited = 0;
-    var message = '';
     numQubits = document.querySelectorAll('.qubit-line').length;
     document.getElementById('quicDisplay').innerHTML = '';
     // if running for the first time
@@ -658,6 +665,8 @@ if(!canEdit) {
         
         document.getElementById('quicDisplay').innerHTML = '';
     });
+
+    document.getElementById('reset').addEventListener('click', resetState);
 
     const hideGridsCheckbox = document.getElementById('hideGrids');
 

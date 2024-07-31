@@ -1,3 +1,17 @@
+#reset {
+    display: display-box;
+    padding: 5px 15px;
+    background: linear-gradient(#275FBD, #08AEE0);
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    align-self: center;
+    align-content: center;
+    width: 100px;
+}
+
 html,
 body,
 iframe {
