@@ -234,9 +234,8 @@ textarea {
 
 .refresh {
     display: display-box;
-    margin-left: 20px;
     padding: 5px 15px;
-    background-color: #063df1;
+    background: linear-gradient(#275FBD, #08AEE0);
     color: white;
     cursor: pointer;
     margin-top: 10px;
@@ -244,8 +243,7 @@ textarea {
     border-radius: 4px;
     align-self: center;
     align-content: center;
-    width: 150px;
-    visibility: hidden;
+    width: 100px;
 }
 
 .control-line {
