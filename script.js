@@ -6,7 +6,7 @@ let allowedGates=['H','X','Y','Z','C','N','P','T','I','m'];
 // let startCircuit = "HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI";
 // // grover 2 - 3 qubits
 // let startCircuit = "HHI,IIX,IIH,III,CCN,III,IIH,IIX,HHI,XXI,IHI,CNI,IHI,XXI,HHI.";
-let startCircuit = "HHH,IIX,CCZ,XXX,CCZ,XXH,HHX,XXH,CCN,XXH,HHX,IIH"
+let startCircuit = "HHH,XII,HII,NCC,IXX,HII,XII,HII,NCC,IIX,IIH,IXX,IHI,IXI,HII,HII,XII,HII,NCC,IIX,IIH,IXI,IHI,HII,XII,HII"
 
 let config = `[
   {
@@ -36,7 +36,13 @@ let preGates;
 let oracle;
 let inited = 0;
 let message = '';
-const maxGates = 12;
+const maxGates = 26;
+
+function autoGrow(field) {
+  if (field.scrollHeight > field.clientHeight) {
+    field.style.height = `${field.scrollHeight}px`;
+  }
+}
 
 function resetState() {
     Module._QuICScript_end();
@@ -431,7 +437,7 @@ function generateQuic() {
     // console.log(quic);
 
     // display pre circuit in input field
-    document.querySelector('#circuitInput').value = quic;
+    document.querySelector('.noscrollbars').value = quic;
     // to be used for grover circuit
     // document.querySelector('#oracleInput').value = oracle;
   
@@ -664,6 +670,9 @@ if(!canEdit) {
         addQubit();
         
         document.getElementById('quicDisplay').innerHTML = '';
+        document.querySelector('.noscrollbars').value = '';
+        document.querySelector('#qiboDisplay').innerHTML = '';
+        
     });
 
     document.getElementById('reset').addEventListener('click', resetState);

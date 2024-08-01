@@ -1,3 +1,10 @@
+textarea.noscrollbars {
+    overflow: hidden;
+    width: 300px;
+    height: 150px;
+    border: 1px solid #ddd;
+}
+
 #reset {
     display: display-box;
     padding: 5px 15px;
@@ -9,7 +16,6 @@
     border-radius: 4px;
     align-self: center;
     align-content: center;
-    width: 100px;
 }
 
 html,
@@ -221,6 +227,7 @@ textarea {
 }
 
 .generate-quic {
+    margin-left: 10px;
     padding: 5px 15px;
     background: linear-gradient(#275FBD, #08AEE0);
     color: white;
@@ -230,7 +237,6 @@ textarea {
     border-radius: 4px;
     align-self: center;
     align-content: center;
-    width: 100px;
 }
 
 .generate-qibo {
@@ -243,7 +249,6 @@ textarea {
     border-radius: 4px;
     align-self: center;
     align-content: center;
-    width: 80px;
 }
 
 .refresh {
@@ -321,8 +326,7 @@ textarea {
 }
 
 .run-circuit {
-    margin-left: 10px;
-    padding: 8px 16px;
+    padding: 5px 15px;
     background: linear-gradient(#275FBD, #08AEE0);
     color: white;
     border: none;

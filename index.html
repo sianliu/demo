@@ -37,15 +37,15 @@
         <br>
         <div class="container">
             <div class="buttons_div">
-                <input type="text" id="circuitInput" placeholder="Initial State" class="input-circuit">
-                <input type="text" id="oracleInput" placeholder="Oracle" class="input-oracle">
-                <input type="text" id="postCircuitInput" placeholder="Diffusion Operator" class="input-circuit">
-                <button id="runCircuit" class="run-circuit">Run</button>
-                <br>
-                <button id="generateQuic" class="generate-quic">QuICScript</button>
-                <button id="generateQibo" class="generate-qibo">QIBO</button>
-                <button id="refresh" class="refresh">Refresh</button>
-                <button id="reset" class="reset">Reset</button>
+                <textarea class="noscrollbars" placeholder="Enter circuit" onkeyup="autoGrow(this);"></textarea>
+                <!-- <input type="text" id="circuitInput" placeholder="Initial State" class="input-circuit"> -->
+                <!-- <input type="text" id="oracleInput" placeholder="Oracle" class="input-oracle">
+                <input type="text" id="postCircuitInput" placeholder="Diffusion Operator" class="input-circuit"> -->
+                <button id="generateQuic" class="generate-quic">1. QuICScript</button>
+                <button id="runCircuit" class="run-circuit">2-3. Run</button>
+                <button id="reset" class="reset">4. Reset</button>
+                <button id="generateQibo" class="generate-qibo">5. QIBO</button>
+                <button id="refresh" class="refresh">6. Refresh</button>
                 <div id="qiboDisplay"></div>
             </div>
             <div id="quicDisplay"></div>
