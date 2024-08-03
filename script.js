@@ -2,11 +2,6 @@ let defaultQubits=3;
 let canAddDeleteQubits=true;
 let canEdit=true;
 let allowedGates=['H','X','Y','Z','C','N','P','T','I','m'];
-// grover 3 - 4 qubits 
-// let startCircuit = "HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI";
-// // grover 2 - 3 qubits
-// let startCircuit = "HHI,IIX,IIH,III,CCN,III,IIH,IIX,HHI,XXI,IHI,CNI,IHI,XXI,HHI.";
-//let startCircuit = "HHH,IIX,IIH,CCN,XXI,IIH,IIX,IIH,CCN,XII,HII,XXI,IHI,IXI,IIH,IIH,IIX,IIH,CCN,XII,HII,IXI,IHI,IIH,IIX,IIH"
 let startCircuit = "HHH,IIX,IIH,CCN,XXI,IIH,IIX,IIH,CCN,XII,HII,XXI,IHI,IXX,IIH,CCN,XII,HXI,IHH,IIX,IIH"
 
 let config = `[
@@ -89,7 +84,6 @@ function generateQibo() {
     resultstate = Module.ccall('QuICScript_Qibo', 'string', ['number', 'string', 'number', 'number', 'number'], [numQubits, quic, 0,0,0]);
     // status generates the result in chrome dev tools console
     document.getElementById('qiboDisplay').innerHTML= "<textarea readonly >" + resultstate + "</textarea>";
-    // document.getElementById('qiboDisplay').innerHTML= resultstate;
 }
 
 function runQuICScript() {
@@ -118,9 +112,6 @@ function runQuICScript() {
 }
 
 function runCircuitFromString(circuitString) {
-    // Clear existing circuit first
-    // document.getElementById('refresh').click();
-
     const steps = circuitString.split(',');
     const qubitCount = steps[0].length; // Determine the number of qubits based on the first step
 
@@ -281,7 +272,6 @@ function dragStart(ev) {
     }
 }
 
-
     // Function to handle drag end
 function dragEnd(ev) {
     // Check if the dragged gate is from the palette or from the circuit
@@ -426,10 +416,6 @@ function generateQuic() {
         });
     });
 
-    // to be used for Grover circuit
-    // preGates = getPreGates();
-    // oracle = getOracleGates();
-     
     // Join the gates with commas and create the QUIC string
     quic = depthGates.map(depth => depth.join('')).join(',');
     quic = depthGates.map(depth => {
@@ -438,28 +424,10 @@ function generateQuic() {
     }).filter(entry => entry !== '').join(',');
     quic = quic + ":";
 
-    // Output the QUIC (here we simply log it to the console, you can change this to display it on the page)
-    // console.log(quic);
-
     // display pre circuit in input field
     document.querySelector('#circuitInput').value = quic;
 
     runQuICScript();
-    // to be used for grover circuit
-    // document.querySelector('#oracleInput').value = oracle;
-  
-
-    // // Optionally, output to the page
-    // const quicDisplay = document.getElementById('quicDisplay');
-    // if (!quicDisplay) {
-    //     const display = document.createElement('div');
-    //     display.id = 'quicDisplay';
-    //     display.textContent = quic;
-    //     document.body.appendChild(display);
-    // } else {
-    //     quicDisplay.textContent = quic;
-    //     // bubble_fn_quic(quic);
-    // }
 }
 
 function drawControlLines() {
@@ -504,7 +472,6 @@ function drawControlLines() {
 
 }
 
-
 function findMaxDepth() {
     return Array.from(document.querySelectorAll('.qubit-line'))
         .reduce((max, line) => Math.max(max, line.querySelectorAll('.gate').length), 0);
@@ -537,15 +504,9 @@ function drawLine(fromElement, toElement) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-
-    //document.getElementById('app').style.display = 'none';
-
     const configBoxesContainer = document.getElementById('configBoxes');
     const gatePalette = document.getElementById('gatePalette');
     const circuit = document.getElementById('circuit');
-
-    
-
 
     // Function to create and append configuration boxes
     function createConfigBoxes() {
@@ -595,7 +556,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (firstConfigBox) {
             firstConfigBox.click();
             firstConfigBox.click();
-            
         }
     }, 0);
 
@@ -626,10 +586,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-
 document.getElementById('addQubit').style.display = canAddDeleteQubits ? '' : 'none';
 document.getElementById('generateQibo').addEventListener('click', generateQibo);
-
 
 if(!canEdit) {
     document.getElementById('gatePalette').style.display = 'none';
@@ -652,8 +610,6 @@ if(!canEdit) {
         }
     });
 
- 
-
     const hideGridsCheckbox = document.getElementById('hideGrids');
 
     hideGridsCheckbox.addEventListener('change', () => {
@@ -667,7 +623,7 @@ if(!canEdit) {
         });
     });
     document.getElementById('runCircuit').addEventListener('click', generateQuic);    
-document.getElementById('reset').addEventListener('click', resetState);
+    document.getElementById('reset').addEventListener('click', resetState);
 }
     });
 });

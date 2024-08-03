@@ -3,17 +3,6 @@
     height: 100%;
 }
 
-html,
-body,
-iframe {
-    height: 100%;
-}
-
-#myframe {
-    width: 100%;
-    height: 100%;
-}
-
 .container {
     display: flex;
     padding-left: 11%;
@@ -42,30 +31,7 @@ textarea {
     vertical-align: top;
     z-index: 1;
     margin-right: 0px;
-
     /* Align the top of gates with the circuit */
-}
-
-#app {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-
-
-
-
-#circuit {
-    position: relative;
-    /* This makes it a positioning context for absolutely positioned children */
-}
-
-
-
-.control-line-over-gate {
-    opacity: 0.5;
 }
 
 .circuit {
@@ -142,7 +108,6 @@ textarea {
     visibility: hidden;
 }
 
-
 .invisible-gate {
     border: 1px dashed #d1d5db;
     background-color: transparent;
@@ -163,14 +128,10 @@ textarea {
     z-index: 2;
 }
 
-
-
-
 /* Add styles for .gate when it's being dragged */
 .gate.dragging {
     opacity: 0.5;
 }
-
 
 .add-qubit {
     padding: 5px 15px;
@@ -239,38 +200,11 @@ textarea {
     align-content: center;
 }
 
-.refresh {
-    display: display-box;
-    padding: 5px 15px;
-    background: linear-gradient(#275FBD, #08AEE0);
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
-    border: none;
-    border-radius: 4px;
-    align-self: center;
-    align-content: center;
-    width: 100px;
-}
-
 .control-line {
     position: absolute;
     z-index: 0;
     background-color: #d1d5db;
     /* Gray color */
-}
-
-/* Alternate styles for multiple connections */
-.control-line.multiple-1 {
-    background-color: #FF4136;
-}
-
-.control-line.multiple-2 {
-    background-color: #0074D9;
-}
-
-.control-line.multiple-3 {
-    background-color: #2ECC40;
 }
 
 #quicDisplay {
@@ -310,14 +244,6 @@ textarea {
     width: 100%;
 }
 
-.input-oracle {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
 .run-circuit {
     padding: 5px 15px;
     background: linear-gradient(#275FBD, #08AEE0);
@@ -327,14 +253,6 @@ textarea {
     cursor: pointer;
     margin-right: 16px;
 }
-
-.run-circuit:hover {
-    background-color: #45a049;
-}
-
-
-
-
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -346,45 +264,12 @@ textarea {
     }
 }
 
-
-/* ..................................................... */
-
-.box {
-    width: 50px;
-    height: 50px;
-    border: 1px solid black;
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 50px;
-    margin: 5px;
-    cursor: pointer;
-}
-
-#boxes-container {
-    margin-top: 20px;
-}
-
 .buttons_div {
     display: block;
     margin: 20px;
     align-self: center;
     padding: 16px;
 }
-
-/* .config-box {
-    padding: 10px;
-    margin: 25px;
-    border: 1px solid #000000;
-    background-color: #d1d5db;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    height: 50px;
-    width: 100px;
-    font-size: large;
-} */
 
 #configBoxes {
     margin-left: 50px;
