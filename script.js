@@ -6,7 +6,8 @@ let allowedGates=['H','X','Y','Z','C','N','P','T','I','m'];
 // let startCircuit = "HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI,IIIX,IIIH,IIII,CCCN,IIII,IIIH,IIIX,HHHI,XXXI,IIHI,CCNI,IIHI,XXXI,HHHI";
 // // grover 2 - 3 qubits
 // let startCircuit = "HHI,IIX,IIH,III,CCN,III,IIH,IIX,HHI,XXI,IHI,CNI,IHI,XXI,HHI.";
-let startCircuit = "HHH,XII,HII,NCC,IXX,HII,XII,HII,NCC,IIX,IIH,IXX,IHI,IXI,HII,HII,XII,HII,NCC,IIX,IIH,IXI,IHI,HII,XII,HII"
+//let startCircuit = "HHH,IIX,IIH,CCN,XXI,IIH,IIX,IIH,CCN,XII,HII,XXI,IHI,IXI,IIH,IIH,IIX,IIH,CCN,XII,HII,IXI,IHI,IIH,IIX,IIH"
+let startCircuit = "HHH,IIX,IIH,CCN,XXI,IIH,IIX,IIH,CCN,XII,HII,XXI,IHI,IXX,IIH,CCN,XII,HXI,IHH,IIX,IIH"
 
 let config = `[
   {
@@ -22,7 +23,7 @@ let configurations = JSON.parse(config);
 let qubitCount = 0;
 
 // Full list of gates supported in Circuit Builder
-const GATES = ['H', 'X', 'Y', 'Z', 'C', 'N', 'P', 'T', 'I', 'm'];
+const GATES = ['H', 'X', 'Y', 'Z', 'C', 'N', 'P', 'T', 'I'];
 
 // Gates recognised for vertical connection to control 'C' gate
 const CONTROLLED_GATES = ['X', 'Y', 'Z', 'P', 'T', 'N'];
@@ -36,7 +37,8 @@ let preGates;
 let oracle;
 let inited = 0;
 let message = '';
-const maxGates = 26;
+const maxGates = 21;
+
 
 function autoGrow(field) {
   if (field.scrollHeight > field.clientHeight) {
@@ -87,11 +89,14 @@ function generateQibo() {
     resultstate = Module.ccall('QuICScript_Qibo', 'string', ['number', 'string', 'number', 'number', 'number'], [numQubits, quic, 0,0,0]);
     // status generates the result in chrome dev tools console
     document.getElementById('qiboDisplay').innerHTML= "<textarea readonly >" + resultstate + "</textarea>";
+    // document.getElementById('qiboDisplay').innerHTML= resultstate;
 }
 
 function runQuICScript() {
+    resetState();
     numQubits = document.querySelectorAll('.qubit-line').length;
     document.getElementById('quicDisplay').innerHTML = '';
+    document.querySelector('#quicDisplay').style.display = 'block';
     // if running for the first time
     if(inited == 0) {
         Module._QuICScript_begin(numQubits);
@@ -114,7 +119,7 @@ function runQuICScript() {
 
 function runCircuitFromString(circuitString) {
     // Clear existing circuit first
-    document.getElementById('refresh').click();
+    // document.getElementById('refresh').click();
 
     const steps = circuitString.split(',');
     const qubitCount = steps[0].length; // Determine the number of qubits based on the first step
@@ -431,13 +436,15 @@ function generateQuic() {
         // Filter out undefined or empty entries before joining
         return depth.filter(gate => gate).join('');
     }).filter(entry => entry !== '').join(',');
-    quic = quic + ".";
-    
+    quic = quic + ":";
+
     // Output the QUIC (here we simply log it to the console, you can change this to display it on the page)
     // console.log(quic);
 
     // display pre circuit in input field
-    document.querySelector('.noscrollbars').value = quic;
+    document.querySelector('#circuitInput').value = quic;
+
+    runQuICScript();
     // to be used for grover circuit
     // document.querySelector('#oracleInput').value = oracle;
   
@@ -620,7 +627,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
 document.getElementById('addQubit').style.display = canAddDeleteQubits ? '' : 'none';
-document.getElementById('generateQuic').addEventListener('click', generateQuic);
+// document.getElementById('generateQuic').addEventListener('click', generateQuic);
 document.getElementById('generateQibo').addEventListener('click', generateQibo);
 
 if(!canEdit) {
@@ -644,36 +651,36 @@ if(!canEdit) {
         }
     });
 
-    document.getElementById('runCircuit').addEventListener('click', runQuICScript);
+    document.getElementById('runCircuit').addEventListener('click', generateQuic);    
+    // document.getElementById('refresh').addEventListener('click', function () {
 
-    document.getElementById('refresh').addEventListener('click', function () {
-        // Remove all qubit lines
-        const qubitLines = document.querySelectorAll('.qubit-line');
-        qubitLines.forEach((line) => {
-            line.parentNode.removeChild(line);
-        });
+    //     // Remove all qubit lines
+    //     const qubitLines = document.querySelectorAll('.qubit-line');
+    //     qubitLines.forEach((line) => {
+    //         line.parentNode.removeChild(line);
+    //     });
     
-        const controlLines = document.querySelectorAll('.control-line');
-        controlLines.forEach((line) => {
-            line.remove(); // This removes the control lines from the DOM
-        });
+    //     const controlLines = document.querySelectorAll('.control-line');
+    //     controlLines.forEach((line) => {
+    //         line.remove(); // This removes the control lines from the DOM
+    //     });
 
-        const separatorLines = document.querySelectorAll('.circuit-separator');
-        separatorLines.forEach((line) => {
-            line.remove(); // This removes the separator lines from the DOM
-        });
+    //     const separatorLines = document.querySelectorAll('.circuit-separator');
+    //     separatorLines.forEach((line) => {
+    //         line.remove(); // This removes the separator lines from the DOM
+    //     });
 
-        // Reset qubit count
-        qubitCount = 0;
+    //     // Reset qubit count
+    //     qubitCount = 0;
     
-        // Add one default qubit line
-        addQubit();
+    //     // Add one default qubit line
+    //     addQubit();
         
-        document.getElementById('quicDisplay').innerHTML = '';
-        document.querySelector('.noscrollbars').value = '';
-        document.querySelector('#qiboDisplay').innerHTML = '';
+    //     document.getElementById('quicDisplay').innerHTML = '';
+    //     document.querySelector('.noscrollbars').value = '';
+    //     document.querySelector('#qiboDisplay').innerHTML = '';
         
-    });
+    // });
 
     document.getElementById('reset').addEventListener('click', resetState);
 
@@ -689,12 +696,6 @@ if(!canEdit) {
             }
         });
     });
-    
-    window.addEventListener('resize', (event) => {
-        clearControlLines();
-        drawControlLines();
-    });
-
 }
     });
 });

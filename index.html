@@ -36,20 +36,24 @@
         </div>
         <br>
         <div class="container">
+            <div id="quicscriptEngine">
+                <input type="text" id="circuitInput" placeholder="QuICScript circuit" class="input-circuit" readonly>
+                <div id="quicDisplay"></div>
+            </div>
+            <div id="qiboDisplay"></div>
+        </div>
+        <center>
             <div class="buttons_div">
-                <textarea class="noscrollbars" placeholder="Enter circuit" onkeyup="autoGrow(this);"></textarea>
-                <!-- <input type="text" id="circuitInput" placeholder="Initial State" class="input-circuit"> -->
                 <!-- <input type="text" id="oracleInput" placeholder="Oracle" class="input-oracle">
                 <input type="text" id="postCircuitInput" placeholder="Diffusion Operator" class="input-circuit"> -->
-                <button id="generateQuic" class="generate-quic">1. QuICScript</button>
-                <button id="runCircuit" class="run-circuit">2-3. Run</button>
-                <button id="reset" class="reset">4. Reset</button>
-                <button id="generateQibo" class="generate-qibo">5. QIBO</button>
-                <button id="refresh" class="refresh">6. Refresh</button>
-                <div id="qiboDisplay"></div>
+                <!-- <button id="generateQuic" class="generate-quic">1. QuICScript</button> -->
+                <button id="runCircuit" class="run-circuit">1. Run</button>
+                <button id="generateQibo" class="generate-qibo">2. QIBO</button>
+                <!-- <button id="refresh" class="refresh">4. Refresh</button> -->
             </div>
-            <div id="quicDisplay"></div>
-        </div>
+        </center>
+
+
 
         <script src="script.js"></script>
     </div>

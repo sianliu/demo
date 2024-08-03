@@ -1,21 +1,6 @@
-textarea.noscrollbars {
-    overflow: hidden;
-    width: 300px;
-    height: 150px;
-    border: 1px solid #ddd;
-}
-
-#reset {
-    display: display-box;
-    padding: 5px 15px;
-    background: linear-gradient(#275FBD, #08AEE0);
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
-    border: none;
-    border-radius: 4px;
-    align-self: center;
-    align-content: center;
+#quicscriptEngine {
+    width: 50%;
+    height: 100%;
 }
 
 html,
@@ -31,12 +16,13 @@ iframe {
 
 .container {
     display: flex;
+    padding-left: 11%;
     width: 100%;
 }
 
 textarea {
-    width: 500px;
-    height: 500px;
+    width: 80%;
+    height: 80%;
     border: none;
     outline: none;
 }
@@ -153,6 +139,7 @@ textarea {
 #grid_hide {
     margin-top: 4px;
     margin-right: 430px;
+    visibility: hidden;
 }
 
 
@@ -237,6 +224,7 @@ textarea {
     border-radius: 4px;
     align-self: center;
     align-content: center;
+    margin-right: 16px;
 }
 
 .generate-qibo {
@@ -288,33 +276,38 @@ textarea {
 #quicDisplay {
     font-family: 'Courier New', Courier, monospace;
     /* Use a monospace font for better alignment */
-    font-size: 18px;
+    font-size: 16px;
     /* Set the font size */
     color: #333;
     /* Set the text color */
-    width: 30%;
-    float: right;
+    width: 50%;
+    height: 200px;
     margin-top: 15px;
+    display: none;
 }
 
 #qiboDisplay {
     font-family: 'Courier New', Courier, monospace;
     /* Use a monospace font for better alignment */
-    font-size: 18px;
+    font-size: 16px;
     /* Set the font size */
     color: #333;
     /* Set the text color */
     float: center;
     margin-top: 15px;
-    margin-left: 200px;
+    margin-left: 50px;
+    margin-right: 10px;
+    width: 50%;
+    align-items: left;
 }
 
 .input-circuit {
-    margin-top: 20px;
+    margin-top: 0px;
     margin-bottom: 20px;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    width: 100%;
 }
 
 .input-oracle {
@@ -332,6 +325,7 @@ textarea {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-right: 16px;
 }
 
 .run-circuit:hover {
@@ -374,6 +368,8 @@ textarea {
 .buttons_div {
     display: block;
     margin: 20px;
+    align-self: center;
+    padding: 16px;
 }
 
 /* .config-box {
