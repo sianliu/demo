@@ -626,9 +626,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+
 document.getElementById('addQubit').style.display = canAddDeleteQubits ? '' : 'none';
-// document.getElementById('generateQuic').addEventListener('click', generateQuic);
 document.getElementById('generateQibo').addEventListener('click', generateQibo);
+
 
 if(!canEdit) {
     document.getElementById('gatePalette').style.display = 'none';
@@ -651,51 +652,22 @@ if(!canEdit) {
         }
     });
 
-    document.getElementById('runCircuit').addEventListener('click', generateQuic);    
-    // document.getElementById('refresh').addEventListener('click', function () {
-
-    //     // Remove all qubit lines
-    //     const qubitLines = document.querySelectorAll('.qubit-line');
-    //     qubitLines.forEach((line) => {
-    //         line.parentNode.removeChild(line);
-    //     });
-    
-    //     const controlLines = document.querySelectorAll('.control-line');
-    //     controlLines.forEach((line) => {
-    //         line.remove(); // This removes the control lines from the DOM
-    //     });
-
-    //     const separatorLines = document.querySelectorAll('.circuit-separator');
-    //     separatorLines.forEach((line) => {
-    //         line.remove(); // This removes the separator lines from the DOM
-    //     });
-
-    //     // Reset qubit count
-    //     qubitCount = 0;
-    
-    //     // Add one default qubit line
-    //     addQubit();
-        
-    //     document.getElementById('quicDisplay').innerHTML = '';
-    //     document.querySelector('.noscrollbars').value = '';
-    //     document.querySelector('#qiboDisplay').innerHTML = '';
-        
-    // });
-
-    document.getElementById('reset').addEventListener('click', resetState);
+ 
 
     const hideGridsCheckbox = document.getElementById('hideGrids');
 
-    hideGridsCheckbox.addEventListener('change', function() {
+    hideGridsCheckbox.addEventListener('change', () => {
         const invisibleGates = document.querySelectorAll('.invisible-gate');
         invisibleGates.forEach(gate => {
-            if (this.checked) {
+            if (hideGridsCheckbox.checked) {
                 gate.style.border = 'none';
             } else {
                 gate.style.border = '1px dashed #d1d5db';
             }
         });
     });
+    document.getElementById('runCircuit').addEventListener('click', generateQuic);    
+document.getElementById('reset').addEventListener('click', resetState);
 }
     });
 });
